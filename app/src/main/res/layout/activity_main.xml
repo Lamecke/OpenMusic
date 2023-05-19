@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    
+    
+    <TextView
+        android:id="@+id/song_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Songs"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/NoSongs_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Songs found"
+        android:layout_centerInParent="true"
+        android:textSize="24sp"
+        android:visibility="gone"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Recycler_Music"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/song_text"
+        />
+</RelativeLayout>

@@ -1,7 +1,9 @@
 package br.com.lamecke.openmusic;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class Music_Item_Adpter  extends RecyclerView.Adapter<Music_Item_Adpter.ViewHold> {
+public class Music_Adpter extends RecyclerView.Adapter<Music_Adpter.ViewHold> {
 
     ArrayList<AudioClip> songsList;
     Context context;
 
-    public Music_Item_Adpter(ArrayList<AudioClip> songsList, Context context) {
+    public Music_Adpter(ArrayList<AudioClip> songsList, Context context) {
         this.songsList = songsList;
         this.context = context;
     }
@@ -25,15 +27,16 @@ public class Music_Item_Adpter  extends RecyclerView.Adapter<Music_Item_Adpter.V
     @Override
     public ViewHold onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.music_item,parent,false);
-        return new Music_Item_Adpter.ViewHold(v);
+        return new Music_Adpter.ViewHold(v);
+
+
     }
 
     @Override
-    public void onBindViewHolder( Music_Item_Adpter.ViewHold  holder, int position) {
+    public void onBindViewHolder(Music_Adpter.ViewHold viewHold,final int position) {
         AudioClip songData = songsList.get(position);
-        holder.textView_Music_Title.setText(songData.getTitle());
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        viewHold.textView_Music_Title.setText(songData.getTitle());
+        viewHold.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MyMediaPlay.getInstance().reset();

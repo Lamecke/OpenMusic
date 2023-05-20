@@ -1,21 +1,15 @@
 package br.com.lamecke.openmusic;
 
 import android.Manifest;
-import android.content.ContentResolver;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -24,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     ArrayList<AudioClip> songList = new ArrayList<>();
 
-    private static final int requestCode = 123;
+    private static final int READ_MEDIA_AUDIO = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         }else {
             Toast.makeText(this,"Request Missed",Toast.LENGTH_LONG).show();
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.READ_MEDIA_AUDIO }, requestCode);
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.READ_MEDIA_AUDIO }, READ_MEDIA_AUDIO);
         }
 
         String[] projection ={
@@ -76,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(new Music_Item_Adpter(songList,getApplicationContext()));
+            recyclerView.setAdapter(new Music_Adpter(songList,getApplicationContext()));
         }
     }
 }

@@ -1,6 +1,5 @@
 package br.com.lamecke.openmusic;
 
-import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
@@ -21,7 +20,7 @@ public class MusicPlayActivity extends AppCompatActivity {
     ArrayList<AudioClip> songsList;
     AudioClip currentClip;
 
-    MediaPlayer mediaPlayer = MyMediaPlay.getInstance();
+    MediaPlayer mediaPlayer = mMediaPlay.getInstance();
 
 
     @Override
@@ -47,12 +46,12 @@ public class MusicPlayActivity extends AppCompatActivity {
             public void run() {
                 if (mediaPlayer!= null){
                     seekBar.setProgress(mediaPlayer.getCurrentPosition());
+
                     if (mediaPlayer.isPlaying()){
                         btn_pausePlay.setBackground((getDrawable(R.drawable.baseline_pause_circle_24)));
                     }else {
                         btn_pausePlay.setBackground((getDrawable(R.drawable.baseline_play_circle_24)));
                     }
-
 
                 }
                 new Handler().postDelayed(this,100);
@@ -79,7 +78,7 @@ public class MusicPlayActivity extends AppCompatActivity {
         });
     }
     private void setResourcesWithMusic(){
-        currentClip = songsList.get(MyMediaPlay.currentIndex);
+        currentClip = songsList.get(mMediaPlay.currentIndex);
         titleView.setText(currentClip.getTitle());
 
         btn_pausePlay.setOnClickListener(b->playPause());
@@ -115,17 +114,17 @@ public class MusicPlayActivity extends AppCompatActivity {
     }
     private void nextSong(){
 
-        if (MyMediaPlay.currentIndex == songsList.size()-1)
+        if (mMediaPlay.currentIndex == songsList.size()-1)
             return;
-        MyMediaPlay.currentIndex +=1;
+        mMediaPlay.currentIndex +=1;
         mediaPlayer.reset();
         setResourcesWithMusic();
 
     }
     private void prevSong(){
-        if (MyMediaPlay.currentIndex == 0)
+        if (mMediaPlay.currentIndex == 0)
             return;
-        MyMediaPlay.currentIndex -=1;
+        mMediaPlay.currentIndex -=1;
         mediaPlayer.reset();
         setResourcesWithMusic();
 

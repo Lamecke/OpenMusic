@@ -1,9 +1,7 @@
 package br.com.lamecke.openmusic;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,18 +27,18 @@ public class Music_Adpter extends RecyclerView.Adapter<Music_Adpter.ViewHold> {
         View v = LayoutInflater.from(context).inflate(R.layout.music_item,parent,false);
         return new Music_Adpter.ViewHold(v);
 
-
     }
 
     @Override
-    public void onBindViewHolder(Music_Adpter.ViewHold viewHold,final int position) {
+    public void onBindViewHolder(Music_Adpter.ViewHold hold,final int position) {
+
         AudioClip songData = songsList.get(position);
-        viewHold.textView_Music_Title.setText(songData.getTitle());
-        viewHold.itemView.setOnClickListener(new View.OnClickListener() {
+        hold.textView_Music_Title.setText(songData.getTitle());
+        hold.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyMediaPlay.getInstance().reset();
-                MyMediaPlay.currentIndex = position;
+                mMediaPlay.getInstance().reset();
+                mMediaPlay.currentIndex = position;
 
                 Intent intent = new Intent(context, MusicPlayActivity.class);
                 intent.putExtra("LIST",songsList);

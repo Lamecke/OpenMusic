@@ -37,14 +37,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.Recycler_Music);
         textView = findViewById(R.id.NoSongs_Text);
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_AUDIO) == PackageManager.PERMISSION_GRANTED)
-        {
-            Toast.makeText(this,"Request Permitted",Toast.LENGTH_LONG).show();
-
-        }else {
-            Toast.makeText(this,"Request Missed",Toast.LENGTH_LONG).show();
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.READ_MEDIA_AUDIO }, READ_MEDIA_AUDIO);
-        }
+        checkPermission();
 
         String[] projection ={
                 MediaStore.Audio.Media.TITLE,
@@ -70,6 +63,22 @@ public class MainActivity extends AppCompatActivity {
         } else {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
             recyclerView.setAdapter(new Music_Adpter(songList,getApplicationContext()));
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    private void checkPermission(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_AUDIO) == PackageManager.PERMISSION_GRANTED)
+        {
+            Toast.makeText(this,"Request Permitted",Toast.LENGTH_LONG).show();
+
+        }else {
+            Toast.makeText(this,"Request Missed",Toast.LENGTH_LONG).show();
+            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.READ_MEDIA_AUDIO }, READ_MEDIA_AUDIO);
         }
     }
 }

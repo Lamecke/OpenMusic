@@ -2,7 +2,7 @@ package br.com.lamecke.openmusic;
 
 import android.media.MediaPlayer;
 
-public class MyMediaPlay {
+public class mMediaPlay {
     static MediaPlayer instance;
     public static MediaPlayer getInstance(){
         if(instance == null){
